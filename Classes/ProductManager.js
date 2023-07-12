@@ -67,10 +67,21 @@ class ProductManager {
 
     }  
     /*********metodo que busca producto mediante un ID pasado como parametro ******/
-    getProductById(id) {
-        const productoBuscado = this.products.find(product => product.id === id)
+    async getProductById(id) {
+        try {
+            if(fs.existsSync(this.path)){
+                const data = await fs.promises.readFile(this.path, 'utf-8')
+                const ourProducts = JSON.parse(data)
+                const productoBuscado = ourProducts.find(product => product.id === id)
+                productoBuscado ? console.log(productoBuscado) : console.log('Product Not Found');
+            }else{
+                console.log('Lo siento algo salio mal')
+            };         
 
-        productoBuscado ? console.log(productoBuscado) : console.log('Product Not Found');
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 };
 
