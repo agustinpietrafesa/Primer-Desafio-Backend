@@ -1,11 +1,17 @@
+const fs = require('fs')
+
 class ProductManager {
-    constructor(){
+    path
+
+    constructor(path){
         this.products = []
+        this.path = './Products.JSON'
+
     };
     productId = 0 
 
     /*********Metodo para agregar productos nuevos la lista *************/
-    addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, price, thumbnail, code, stock) {
         this.productId++;
         const product = {
             title,
@@ -32,6 +38,15 @@ class ProductManager {
         } else {            
             this.products.push(product);
         }
+
+        if(fs.existsSync(this.path)){
+         await fs.promises.appendFile(this.path, JSON.stringify(product))
+            console.log('caso 1')
+        }else{
+            await fs.promises.writeFile(this.path, JSON.stringify(this.products))
+            console.log('Caso 2')
+        }
+        
      }
     /*********Metodo que retorna toda la lista de los productos que haya hasta el momento *******/
     getProducts() {
@@ -47,15 +62,18 @@ class ProductManager {
 
 /********Lineas comentadas para poder probar el codigo *********/
 
-// const listaProductos = new ProductManager()
+const listaProductos = new ProductManager()
 
-// listaProductos.addProduct('Celular', 'Iphone', 250, 'Sin Imagen', '13Pro', 40);
+listaProductos.addProduct('Celular', 'Iphone', 250, 'Sin Imagen', '13Pro', 40);
 
-// listaProductos.addProduct('Tablet', 'Samsung', 300, 'Sin Imagen', 'A10', 40);
+listaProductos.addProduct('Tablet', 'Samsung', 300, 'Sin Imagen', 'A10', 40);
 
 // listaProductos.addProduct('Notebook', 'Mac', 400, 'Sin Imagen', 'MacPro', 40);
 
-// console.log(listaProductos.getProducts())
+
+// listaProductos.addProduct('Macbook', 'Mac', 400, 'Sin Imagen', 'MacAir', 20);
+
+console.log(listaProductos.getProducts())
 
 
 
