@@ -10,6 +10,7 @@ class ProductManager {
     };
     productId = 0 
 
+
     /*********Metodo para agregar productos nuevos la lista *************/
     async addProduct(title, description, price, thumbnail, code, stock) {
         try {
@@ -57,6 +58,7 @@ class ProductManager {
             if(fs.existsSync(this.path)){
                 const data = await fs.promises.readFile(this.path, 'utf-8')
                 const ourProducts = JSON.parse(data)
+                console.log(ourProducts)
                 return ourProducts
             }else{
                 return []
@@ -83,8 +85,34 @@ class ProductManager {
         }
 
     }
-};
 
+    /************Metodo que busca un producto por el id y modifica uno o todos sus campos ******/
+
+
+
+
+
+    /**************Metodo que busca un producto por su id y lo elimina del array ***************/
+
+    async deleteProduct(id) {
+        const data = await fs.promises.readFile(this.path, 'utf-8')
+        const ourProducts = JSON.parse(data)
+        const productIndex = ourProducts.findIndex(product => product.id === id)
+
+        productIndex < 0 
+        ?
+        console.log('No se encuentra el producto que desea eliminar')
+        :
+        ourProducts.splice(productIndex, 1); 
+        this.products = await ourProducts
+        await fs.promises.writeFile(this.path, JSON.stringify(this.products))
+        
+        
+    }
+
+
+};
+ 
 /*********Exportamos la clase ********/
 
 module.exports = ProductManager
