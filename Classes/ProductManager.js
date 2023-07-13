@@ -1,9 +1,11 @@
+const { error } = require('console')
 const fs = require('fs')
 
 class ProductManager {
     path
+    products
 
-    constructor(path){
+    constructor(){
         this.products = []
         this.path = './Files/Products.JSON'
 
@@ -55,11 +57,15 @@ class ProductManager {
     /*********Metodo que retorna toda la lista de los productos que haya hasta el momento *******/
     async getProducts() {
         try {
-            if(fs.existsSync(this.path)){
-                const data = await fs.promises.readFile(this.path, 'utf-8')
-                const ourProducts = JSON.parse(data)
-                console.log(ourProducts)
-                return ourProducts
+            if(fs.existsSync(this.path)){ 
+                const data = await fs.promises.readFile(this.path, 'utf-8', (error, datos) => {
+                    if(error){
+                        console.log(error)
+                    }else{
+                        data = JSON.parse(datos)
+                        return data
+                    }
+                })
             }else{
                 return []
             };            

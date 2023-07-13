@@ -1,12 +1,6 @@
-const { title } = require("process");
 const ProductManager = require("./Classes/ProductManager");
 
 const managerProductos = new ProductManager()
-
-managerProductos.addProduct('Celular', 'Iphone', 250, 'Sin Imagen', '13Pro', 40);
-managerProductos.addProduct('Iphone', 'apple', 250, 'Sin Imagen', '14Pro', 50);
-
-managerProductos.addProduct('Notebook', 'Samsung', 250, 'Sin Imagen', 'Samsung11', 50);
 
 const allProducts = () => {
         managerProductos.getProducts()
@@ -14,12 +8,16 @@ const allProducts = () => {
         .catch(error => console.log(error))
     }
     
-    
+    allProducts()
+
+managerProductos.addProduct('producto Prueba',  'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25 )
+
+    allProducts()
+
     //managerProductos.getProductById(1)
+     
+    // managerProductos.deleteProduct(2)
     
-    managerProductos.deleteProduct(2)
-    
-   allProducts()
 
 
     
