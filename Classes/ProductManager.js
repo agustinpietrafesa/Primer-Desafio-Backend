@@ -1,4 +1,3 @@
-const { error } = require('console')
 const fs = require('fs')
 
 class ProductManager {
@@ -58,14 +57,9 @@ class ProductManager {
     async getProducts() {
         try {
             if(fs.existsSync(this.path)){ 
-                const data = await fs.promises.readFile(this.path, 'utf-8', (error, datos) => {
-                    if(error){
-                        console.log(error)
-                    }else{
-                        data = JSON.parse(datos)
-                        return data
-                    }
-                })
+                const data = await fs.promises.readFile(this.path, 'utf-8')
+                this.products = JSON.parse(data)
+                return this.products
             }else{
                 return []
             };            

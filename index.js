@@ -14,12 +14,11 @@ managerProductos.addProduct('producto Prueba',  'Este es un producto de prueba',
 
     allProducts()
 
-    //managerProductos.getProductById(1)
+    managerProductos.getProductById(1)
      
-    // managerProductos.deleteProduct(2)
+    managerProductos.deleteProduct(1)
     
-
-
+    allProducts()
     
 
 
