@@ -2,23 +2,41 @@ const ProductManager = require("./Classes/ProductManager");
 
 const managerProductos = new ProductManager()
 
-const allProducts = () => {
-        managerProductos.getProducts()
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+const allProducts = async () => {
+    try {
+        const products = await managerProductos.getProducts()
+        console.log(products)
+ 
+        await managerProductos.addProduct('producto Prueba',  'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25 )
+
+        const products1 = await managerProductos.getProducts()
+        console.log(products1)
+ 
+        await managerProductos.deleteProduct(1)
+        
+        const products2 = await managerProductos.getProducts()
+        console.log(products2)
+        
+    } catch (error) {
+        console.log(error)
+    }
     }
     
-    allProducts()
+allProducts()
 
-managerProductos.addProduct('producto Prueba',  'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25 )
 
-    allProducts()
 
-    managerProductos.getProductById(1)
+// // managerProductos.addProduct('producto Prueba',  'Este es un producto de prueba', 200, 'Sin imagen', 'abc23', 25 )
+// // managerProductos.addProduct('producto Prueba',  'Este es un producto de prueba', 200, 'Sin imagen', 'abc1234', 25 )
+
+
+
+//managerProductos.getProductById(1)
      
-    managerProductos.deleteProduct(1)
-    
-    allProducts()
+
+
+
+
     
 
 

@@ -59,7 +59,7 @@ class ProductManager {
             if(fs.existsSync(this.path)){ 
                 const data = await fs.promises.readFile(this.path, 'utf-8')
                 this.products = JSON.parse(data)
-                return this.products
+                return this.products ? this.products : []
             }else{
                 return []
             };            
@@ -105,9 +105,8 @@ class ProductManager {
         :
         ourProducts.splice(productIndex, 1); 
         this.products = await ourProducts
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products))
-        
-        
+        const datos1 = await fs.promises.writeFile(this.path, JSON.stringify(this.products))
+
     }
 
 
