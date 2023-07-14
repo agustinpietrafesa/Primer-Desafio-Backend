@@ -88,6 +88,24 @@ class ProductManager {
 
     /************Metodo que busca un producto por el id y modifica uno o todos sus campos ******/
 
+    async updateProduct(id, campo, valor){
+        try {
+            if(fs.existsSync(this.path)){
+                const data = await fs.promises.readFile(this.path, 'utf-8')
+                const ourProducts = JSON.parse(data)
+                const productoBuscado = ourProducts.find(product => product.id === id)
+                const productoModificado = {...productoBuscado, campo: valor}
+                productoBuscado ? console.log(productoModificado) : console.log('Product Not Found');
+            }else{
+                console.log('Lo siento algo salio mal')
+            };         
+
+        } catch (error) {
+            console.log(error)
+        }
+
+
+    }
 
 
 
