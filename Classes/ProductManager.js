@@ -53,8 +53,6 @@ class ProductManager {
 
      };
 
-    
-
     /*********Metodo que retorna toda la lista de los productos que haya hasta el momento *******/
     async getProducts() {
         try {
@@ -112,9 +110,6 @@ class ProductManager {
 
 
     }
-
-
-
 
     /**************Metodo que busca un producto por su id y lo elimina del array ***************/
 
