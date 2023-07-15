@@ -9,17 +9,19 @@ const allProducts = async () => {
  
         await managerProductos.addProduct('producto Prueba',  'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25 )
 
-        // const products1 = await managerProductos.getProducts()
-        // console.log(products1)
- 
+        
         //await managerProductos.deleteProduct(1)
         
         // const products2 = await managerProductos.getProducts()
         // console.log(products2)
-
-        await managerProductos.updateProduct(1, 'price', 3000)
-
         
+        await managerProductos.updateProduct(1, 'title' , 'hola bebe')
+        
+        await managerProductos.updateProduct(1, 'price' , 'impagable')
+
+        const products1 = await managerProductos.getProducts()
+        console.log(products1)
+
     } catch (error) {
         console.log(error)
     }

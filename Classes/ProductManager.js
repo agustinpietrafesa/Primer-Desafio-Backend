@@ -53,6 +53,8 @@ class ProductManager {
 
      };
 
+    
+
     /*********Metodo que retorna toda la lista de los productos que haya hasta el momento *******/
     async getProducts() {
         try {
@@ -94,12 +96,16 @@ class ProductManager {
                 const data = await fs.promises.readFile(this.path, 'utf-8')
                 const ourProducts = JSON.parse(data)
                 const productoBuscado = ourProducts.find(product => product.id === id)
-                const productoModificado = {...productoBuscado, campo: valor}
-                productoBuscado ? console.log(productoModificado) : console.log('Product Not Found');
+                await this.deleteProduct(id)
+                let key = campo
+                productoBuscado[key] = valor
+                productoBuscado ? this.products.push(productoBuscado) : console.log('Product Not Found');
+                await fs.promises.writeFile(this.path, JSON.stringify(this.products))
+
             }else{
                 console.log('Lo siento algo salio mal')
             };         
-
+ 
         } catch (error) {
             console.log(error)
         }
